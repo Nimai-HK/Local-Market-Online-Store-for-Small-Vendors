@@ -46,3 +46,29 @@ To customise:
 - Edit product data and image URLs near the top of script.js.
 - Change colours and layout in style.css.
 - Edit text, sections and navigation in index.html.
+
+## Project Members:
+<table style="width:100%; border-collapse:collapse;">
+  <tr>
+    <th style="text-align:center;">Name</th>
+    <th style="text-align:center;">Roll No</th>
+    <th style="text-align:center;">Registration No.</th>
+    <th style="text-align:center;">Section</th>
+  </tr>
+  <tr>
+    <td>Mohit Kumar</td>
+    <td>RK2P26GUA06</td>
+    <td>12601077</td>
+    <td rowspan="3" style="text-align:center; vertical-align:middle;">K2P26GU</td>
+  </tr>
+  <tr>
+    <td>Nimai Hithesh</td>
+    <td>RK2P26GUA03</td>
+    <td>12606037</td>
+  </tr>
+  <tr>
+    <td>Mukilan Muthuvalathan</td>
+    <td>RK2P26GUA07</td>
+    <td>12601077</td>
+  </tr>
+</table>
