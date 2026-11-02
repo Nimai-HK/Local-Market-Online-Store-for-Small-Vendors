@@ -1,51 +1,24 @@
-APNA BAZAAR PRO — ADVANCED FRONTEND DEMO
-========================================
+# Apna Bazaar
 
-Files:
-- index.html : website structure
-- style.css  : responsive visual design and dark mode
-- script.js  : interactive functionality
+A simple local market storefront for small vendors. The project is a dark-only front-end demo for browsing daily essentials, adding items to a cart, and placing an order without a payment flow.
 
-HOW TO RUN IN VS CODE:
-1. Download the ZIP file.
-2. Right-click it in Windows File Explorer > Extract All.
-3. Open VS Code.
-4. Choose File > Open Folder.
-5. Select the extracted "apna_bazaar_pro" folder.
-6. Open index.html.
-7. Recommended: install the "Live Server" extension in VS Code.
-8. Right-click index.html > Open with Live Server.
+## Pages
+- Main page: landing section with local product categories and vendor cards
+- Categories page: product lists for groceries, plants and pots, stationery, and snacks
+- Checkout page: customer details and order summary
 
-You can also double-click index.html to open it in a browser, but Live Server is recommended.
+## What the website does
+- Shows basic local market categories and everyday products
+- Lets users add items to the cart with quantity controls
+- Keeps the design simple and dark themed
+- Displays local vendor information on the home page
+- Accepts customer details like name, phone number, email, and address
+- Uses a front-end order confirmation only; no real payment or backend is included
 
-FEATURES:
-- Premium responsive storefront design
-- Product search across names, sellers and categories
-- Category navigation and filtering
-- Sorting by featured, rating, price and name
-- Maximum-price and minimum-rating filters
-- Product cards, discount labels and ratings
-- Add to cart, quantity controls and remove items
-- Wishlist saved in localStorage
-- Demo coupon code: LOCAL10 (10% off)
-- Demo checkout form and order confirmation
-- Seller profiles and seller-interest form
-- Newsletter signup demo
-- Dark mode saved in localStorage
-- Toast messages, mobile-friendly layout and modal dialogs
-- Uses localStorage so demo data persists in the same browser
-
-IMPORTANT:
-This is an advanced FRONTEND project. It does not have a real backend/database,
-real authentication, real order fulfilment or real payment processing. All
-products/sellers are sample data and all form submissions are saved only in
-the current browser's localStorage. Product images and Google Fonts need an
-internet connection. Never enter real payment details into this demo.
-
-To customise:
-- Edit product data and image URLs near the top of script.js.
-- Change colours and layout in style.css.
-- Edit text, sections and navigation in index.html.
+## Project structure
+- index.html — main page and sections
+- style.css — page styling and layout
+- script.js — cart and category interaction logic
 
 ## Project Members:
 <table style="width:100%; border-collapse:collapse;">
@@ -56,19 +29,19 @@ To customise:
     <th style="text-align:center;">Section</th>
   </tr>
   <tr>
-    <td>Mohit Kumar</td>
-    <td>RK2P26GUA06</td>
-    <td>12601077</td>
+    <td style="text-align:center;">Mohit Kumar</td>
+    <td style="text-align:center;">RK2P26GUA06</td>
+    <td style="text-align:center;">12601077</td>
     <td rowspan="3" style="text-align:center; vertical-align:middle;">K2P26GU</td>
   </tr>
   <tr>
-    <td>Nimai Hithesh</td>
-    <td>RK2P26GUA03</td>
-    <td>12606037</td>
+    <td style="text-align:center;">Nimai Hithesh</td>
+    <td style="text-align:center;">RK2P26GUA03</td>
+    <td style="text-align:center;">12606037</td>
   </tr>
   <tr>
-    <td>Mukilan Muthuvalathan</td>
-    <td>RK2P26GUA07</td>
-    <td>12601077</td>
+    <td style="text-align:center;">Mukilan</td>
+    <td style="text-align:center;">RK2P26GUA07</td>
+    <td style="text-align:center;">12601400</td>
   </tr>
 </table>
