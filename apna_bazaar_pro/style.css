@@ -1,15 +1,15 @@
  :root {
-  --bg: #0d1217;
-  --bg-soft: #141d24;
-  --panel: #1a252d;
-  --panel-strong: #1f2d36;
-  --text: #edf3f8;
-  --muted: #aebfc9;
-  --border: rgba(255, 255, 255, 0.08);
-  --green: #8adba1;
-  --green-strong: #5bbf7e;
-  --green-deep: #1b3a30;
-  --shadow: 0 18px 38px rgba(0, 0, 0, 0.2);
+  --bg: #111413;
+  --bg-soft: #181d1b;
+  --panel: #212825;
+  --panel-strong: #2c3531;
+  --text: #e6e8e5;
+  --muted: #939b95;
+  --border: rgba(255, 255, 255, 0.07);
+  --green: #739e82;
+  --green-strong: #5a8268;
+  --green-deep: #203628;
+  --shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
 }
 
 * {
@@ -61,13 +61,13 @@ button {
  display: flex;
  align-items: center;
  justify-content: space-between;
- gap: 18px;
- min-height: 78px;
- padding: 12px 14px;
- margin-top: 12px;
- background: #111b21;
+ gap: 0px;
+ min-height: 72px;
+ padding: 12px 12px;
+ margin-top: 8px;
+ background: rgba(33, 40, 37, 0.9);
  border: 1px solid var(--border);
- border-radius: 16px;
+ border-radius: 6px;
  box-shadow: var(--shadow);
 }
 
@@ -83,7 +83,7 @@ button {
  height: 42px;
  display: grid;
  place-items: center;
- border-radius: 12px;
+ border-radius: 6px;
  background: linear-gradient(135deg, var(--green), var(--green-strong));
  color: #0d1217;
  overflow: hidden;
@@ -247,7 +247,7 @@ button {
   align-items: center;
   padding: 40px 28px;
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 8px;
   overflow: hidden;
   box-shadow: var(--shadow);
   background: var(--panel);
@@ -334,7 +334,7 @@ button {
 .checkout-form {
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 8px;
   box-shadow: var(--shadow);
 }
 
