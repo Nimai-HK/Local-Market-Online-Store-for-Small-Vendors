@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,62 +9,60 @@
   <body>
     <header class="topbar">
       <div class="brand">
-        <span class="brand-mark" aria-label="Apna Bazaar"><span class="brand-letter a">A</span><span class="brand-letter b">B</span></span>
+        <img class="brand-mark" src="logo.png" alt="Apna Bazaar logo" />
         <div class="brand-copy">
           <strong>Apna Bazaar</strong>
-          <small>Local market</small>
+          <span>LOCAL MARKET</span>
         </div>
       </div>
 
-      <nav class="nav" aria-label="Main navigation">
+      <nav class="main-nav" aria-label="Main navigation">
         <button type="button" class="nav-btn active" data-view="home">Home</button>
         <button type="button" class="nav-btn" data-view="categories">Categories</button>
         <button type="button" class="nav-btn cart-btn" data-view="checkout">
-          <span class="cart-icon">🛒</span>
+          <span>🛒</span>
           <span>Cart</span>
           <span id="cartCount" class="cart-count">0</span>
         </button>
       </nav>
     </header>
 
-    <main class="main-shell">
-      <section id="home" class="view active">
-        <section class="hero">
+    <main class="page">
+      <section id="home" class="panel active">
+        <div class="hero">
           <div class="hero-copy">
             <p class="eyebrow">Fresh from your neighbourhood</p>
             <h1>Shop locally for everyday essentials.</h1>
-            <p>
-              Fresh produce, household basics, plants, stationery and snacks from trusted local sellers near you.
-            </p>
+            <p>Fresh produce, household basics, plants, stationery and snacks from trusted local sellers near you.</p>
           </div>
-        </section>
+        </div>
 
-        <section class="home-categories">
-          <div class="section-title">
+        <div class="section-block">
+          <div class="title-row">
             <h2>Fresh essentials for every home</h2>
-            <p class="label">Categories</p>
+            <p class="eyebrow">Categories</p>
           </div>
 
-          <div class="category-grid">
-            <button type="button" class="category-card" data-category="groceries" style="background-image: linear-gradient(rgba(10, 15, 16, 0.5), rgba(10, 15, 16, 0.5)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1000&q=80');">
+          <div class="shop-grid">
+            <button type="button" class="shop-card" data-category="groceries" style="background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1000&q=80');">
               <span>Groceries</span>
             </button>
-            <button type="button" class="category-card" data-category="plants-pots" style="background-image: linear-gradient(rgba(10, 15, 16, 0.5), rgba(10, 15, 16, 0.5)), url('https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=1000&q=80');">
+            <button type="button" class="shop-card" data-category="plants-pots" style="background-image: url('https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=1000&q=80');">
               <span>Plants and Pots</span>
             </button>
-            <button type="button" class="category-card" data-category="stationery" style="background-image: linear-gradient(rgba(10, 15, 16, 0.5), rgba(10, 15, 16, 0.5)), url('https://tse1.mm.bing.net/th/id/OIP.BQTt5vaPXomBjewK-99-uQHaEv?r=0&rs=1&pid=ImgDetMain&o=7&rm=3');">
+            <button type="button" class="shop-card" data-category="stationery" style="background-image: url('https://tse1.mm.bing.net/th/id/OIP.BQTt5vaPXomBjewK-99-uQHaEv?r=0&rs=1&pid=ImgDetMain&o=7&rm=3');">
               <span>Stationery</span>
             </button>
-            <button type="button" class="category-card" data-category="snacks" style="background-image: linear-gradient(rgba(10, 15, 16, 0.5), rgba(10, 15, 16, 0.5)), url('https://media1.popsugar-assets.com/files/thumbor/_kQYPOgrbL064Af_QCqvwgnd004/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2020/10/20/618/n/1922729/413675d6e3a9d780_netimgL0HJXE/i/Ultimate-Classic-Snacks-Package-Variety.jpg');">
+            <button type="button" class="shop-card" data-category="snacks" style="background-image: url('https://media1.popsugar-assets.com/files/thumbor/_kQYPOgrbL064Af_QCqvwgnd004/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2020/10/20/618/n/1922729/413675d6e3a9d780_netimgL0HJXE/i/Ultimate-Classic-Snacks-Package-Variety.jpg');">
               <span>Snacks</span>
             </button>
           </div>
-        </section>
+        </div>
 
-        <section class="vendor-section">
-          <div class="section-title">
+        <div class="section-block">
+          <div class="title-row">
             <h2>Trusted by your neighbourhood</h2>
-            <p class="label">Local vendors</p>
+            <p class="eyebrow">Local vendors</p>
           </div>
 
           <div class="vendor-grid">
@@ -97,16 +95,12 @@
               </div>
             </article>
           </div>
-        </section>
+        </div>
       </section>
 
-      <section id="categories" class="view">
-        <div class="section-header">
-          <div>
-            <p class="eyebrow">Shop nearby</p>
-            <h2 id="categoryTitle">Groceries</h2>
-          </div>
-          <button type="button" class="back-btn" data-view="home">Back</button>
+      <section id="categories" class="panel">
+        <div class="title-row">
+          <h2 id="categoryTitle">Groceries</h2>
         </div>
 
         <div class="filter-row">
@@ -116,20 +110,16 @@
           <button type="button" class="filter-btn" data-category="snacks">Snacks</button>
         </div>
 
-        <div id="categoryPanels" class="category-panels"></div>
+        <div id="categoryPanels" class="catalog-grid"></div>
       </section>
 
-      <section id="checkout" class="view">
-        <div class="section-header">
-          <div>
-            <p class="eyebrow">Checkout</p>
-            <h2>Your order</h2>
-          </div>
-          <button type="button" class="back-btn" data-view="home">Back</button>
+      <section id="checkout" class="panel">
+        <div class="title-row">
+          <h2>Your order</h2>
         </div>
 
         <div class="checkout-layout">
-          <form id="checkoutForm" class="checkout-form" novalidate>
+          <form id="checkoutForm" class="checkout-form">
             <label>
               Full name
               <input type="text" id="customerName" placeholder="Your full name" required />
@@ -140,7 +130,7 @@
             </label>
             <label>
               Email
-              <input type="email" id="customerEmail" placeholder="you@example.com" required />
+              <input type="text" id="customerEmail" placeholder="you@example.com" required pattern=".*@.*" title="Please include @ in your email." />
             </label>
             <label>
               Shipping address

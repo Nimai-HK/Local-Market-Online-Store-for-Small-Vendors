@@ -5,6 +5,7 @@ const categoryLabels = {
   stationery: 'Stationery',
   snacks: 'Snacks'
 };
+
 const productCatalog = {
   groceries: [
     { id: 'g1', name: 'Tomato (1kg)', price: 40, oldPrice: 60, image: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=900&q=80' },
@@ -53,29 +54,29 @@ const productCatalog = {
     { id: 'n2', name: 'Kurkure', price: 20, oldPrice: 30, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2XeaBeYogQDxXb3mMiife-f_2kZ1IiTeJdXRJEL8qHg&s=10' },
     { id: 'n3', name: 'Roasted Peanuts', price: 49, oldPrice: 79, image: 'https://images.unsplash.com/photo-1639070863891-a20035caf05a?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
     { id: 'n4', name: 'Masala Fries', price: 35, oldPrice: 50, image: 'https://images.unsplash.com/photo-1576107232684-1279f390859f?auto=format&fit=crop&w=900&q=80' },
-    { id: 'n5', name: 'Makhana', price: 99, oldPrice: 149, image: 'https://images.unsplash.com/photo-1710421576768-ff985fa63b60?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'n6', name: 'Namkeen Mix', price: 45, oldPrice: 65, image: 'https://images.unsplash.com/photo-1791989396500-127d525aa9f7?q=80&w=1212&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'n7', name: 'Biscuits', price: 35, oldPrice: 50, image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=900&q=80' },
-    { id: 'n8', name: 'Yippee Noodles', price: 149, oldPrice: 199, image: 'https://images.unsplash.com/photo-1628919311414-1ee37e9ed8ff?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'n9', name: 'Chips', price: 30, oldPrice: 45, image: 'https://images.unsplash.com/photo-1760997707695-f0b5527e5de9?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'n10', name: 'Roasted Seeds', price: 119, oldPrice: 169, image: 'https://plus.unsplash.com/premium_photo-1725878607601-db35b20463e8?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'n11', name: 'Popcorn', price: 40, oldPrice: 60, image: 'https://images.unsplash.com/photo-1578849278619-e73505e9610f?auto=format&fit=crop&w=900&q=80' },
-    { id: 'n12', name: 'Mixed Fruit Candies', price: 50, oldPrice: 75, image: 'https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?auto=format&fit=crop&w=900&q=80' }
+    { id: 'n5', name: 'Makhana', price: 99, oldPrice: 149, image: 'https://images.unsplash.com/photo-1626086127289-62d9d0cc9ebc?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
+    { id: 'n6', name: 'Biscuits', price: 80, oldPrice: 120, image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=900&q=80' },
+    { id: 'n7', name: 'Trail Mix', price: 140, oldPrice: 199, image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80' },
+    { id: 'n8', name: 'Soan Papdi', price: 120, oldPrice: 170, image: 'https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&w=900&q=80' },
+    { id: 'n9', name: 'Namkeen Mix', price: 75, oldPrice: 120, image: 'https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=900&q=80' },
+    { id: 'n10', name: 'Chips Family Pack', price: 60, oldPrice: 85, image: 'https://images.unsplash.com/photo-1612765117781-7c1c0992b4d9?auto=format&fit=crop&w=900&q=80' },
+    { id: 'n11', name: 'Coconut Cookies', price: 90, oldPrice: 130, image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80' },
+    { id: 'n12', name: 'Fruit Biscuits', price: 110, oldPrice: 160, image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=900&q=80' }
   ]
 };
 
 function formatPrice(value) {
-  return '₹' + Number(value).toLocaleString('en-IN');
+  return `₹${Number(value || 0).toLocaleString('en-IN')}`;
 }
 
 function getProductLookup() {
-  const map = {};
+  const catalog = {};
   Object.values(productCatalog).forEach((items) => {
     items.forEach((item) => {
-      map[item.id] = item;
+      catalog[item.id] = item;
     });
   });
-  return map;
+  return catalog;
 }
 
 function getCart() {
@@ -105,7 +106,7 @@ function renderCategoryPanels() {
 
   const categories = Object.keys(productCatalog);
   const panels = categories.map((key) => {
-    const panelClass = key === 'groceries' ? 'category-panel active' : 'category-panel';
+    const panelClass = key === 'groceries' ? 'catalog-panel active' : 'catalog-panel';
     const items = productCatalog[key].map((item) => `
       <article class="product-card" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
         <img src="${item.image}" alt="${item.name}" />
@@ -139,12 +140,16 @@ function renderCategoryPanels() {
 }
 
 function showView(viewName) {
-  document.querySelectorAll('.view').forEach((view) => {
-    view.classList.toggle('active', view.id === viewName);
+  const targetView = viewName || 'home';
+
+  document.querySelectorAll('.panel').forEach((panel) => {
+    const isActive = panel.id === targetView;
+    panel.classList.toggle('active', isActive);
+    panel.hidden = !isActive;
   });
 
   document.querySelectorAll('.nav-btn').forEach((button) => {
-    button.classList.toggle('active', button.dataset.view === viewName);
+    button.classList.toggle('active', button.dataset.view === targetView);
   });
 }
 
@@ -153,7 +158,7 @@ function showCategory(category) {
     button.classList.toggle('active', button.dataset.category === category);
   });
 
-  document.querySelectorAll('.category-panel').forEach((panel) => {
+  document.querySelectorAll('.catalog-panel').forEach((panel) => {
     panel.classList.toggle('active', panel.dataset.categoryGroup === category);
   });
 
@@ -218,9 +223,9 @@ function bindEvents() {
       return;
     }
 
-    const categoryCard = event.target.closest('.category-card');
-    if (categoryCard) {
-      showCategory(categoryCard.dataset.category);
+    const shopCard = event.target.closest('.shop-card');
+    if (shopCard) {
+      showCategory(shopCard.dataset.category);
       showView('categories');
       return;
     }
@@ -254,15 +259,11 @@ function bindEvents() {
       addToCart(card?.dataset.id, quantity);
       return;
     }
-
-    const backButton = event.target.closest('.back-btn');
-    if (backButton) {
-      showView(backButton.dataset.view);
-    }
   });
 
   document.getElementById('checkoutForm')?.addEventListener('submit', (event) => {
     event.preventDefault();
+
     const message = document.getElementById('checkoutMessage');
     if (!message) return;
 
