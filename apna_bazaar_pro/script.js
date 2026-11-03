@@ -1,287 +1,645 @@
-const cartKey = 'apnaBazaarCart';
-const categoryLabels = {
+const state = {
+  activeView: 'home',
+  authMode: 'signin',
+  currentVendorId: Number(localStorage.getItem('localMarketVendorId')) || null,
+  activeCategory: 'groceries',
+  activeTab: 'admin',
+  lastCustomerName: 'Ava Patel',
+  vendors: [
+    { id: 1, name: 'Green Basket', owner: 'Priya Sharma', category: 'Groceries', city: 'Bengaluru', phone: '98765 43210', email: 'priya@greenbasket.in', password: 'vendor123', rating: 4.9 },
+    { id: 2, name: 'Leaf & Pot', owner: 'Arjun Nair', category: 'Plants', city: 'Coimbatore', phone: '99887 66121', email: 'arjun@leafpot.in', password: 'vendor123', rating: 4.8 },
+    { id: 3, name: 'Paper Lane', owner: 'Meera Iyer', category: 'Stationery', city: 'Chennai', phone: '97441 22190', email: 'meera@paperlane.in', password: 'vendor123', rating: 4.7 },
+    { id: 4, name: 'Snack Corner', owner: 'Karan Joshi', category: 'Snacks', city: 'Pune', phone: '98112 77890', email: 'karan@snackcorner.in', password: 'vendor123', rating: 4.9 }
+  ],
+  products: [
+    { id: 'g1', name: 'Tomato Basket', price: 40, oldPrice: 60, category: 'groceries', stock: 26, vendor: 'Green Basket', emoji: '🍅' },
+    { id: 'g2', name: 'Potato Bag', price: 35, oldPrice: 50, category: 'groceries', stock: 18, vendor: 'Green Basket', emoji: '🥔' },
+    { id: 'g3', name: 'Banana Bunch', price: 45, oldPrice: 60, category: 'groceries', stock: 32, vendor: 'Green Basket', emoji: '🍌' },
+    { id: 'g4', name: 'Onion Pack', price: 32, oldPrice: 48, category: 'groceries', stock: 24, vendor: 'Green Basket', emoji: '🧅' },
+    { id: 'p1', name: 'Snake Plant', price: 299, oldPrice: 450, category: 'plants-pots', stock: 9, vendor: 'Leaf & Pot', emoji: '🌿' },
+    { id: 'p2', name: 'Aloe Vera', price: 199, oldPrice: 299, category: 'plants-pots', stock: 14, vendor: 'Leaf & Pot', emoji: '💚' },
+    { id: 'p3', name: 'Fern Pot', price: 220, oldPrice: 330, category: 'plants-pots', stock: 16, vendor: 'Leaf & Pot', emoji: '🌱' },
+    { id: 'p4', name: 'Monstera', price: 340, oldPrice: 460, category: 'plants-pots', stock: 7, vendor: 'Leaf & Pot', emoji: '🌿' },
+    { id: 's1', name: 'Notebook', price: 99, oldPrice: 150, category: 'stationery', stock: 22, vendor: 'Paper Lane', emoji: '📓' },
+    { id: 's2', name: 'Pen Set', price: 129, oldPrice: 199, category: 'stationery', stock: 12, vendor: 'Paper Lane', emoji: '✒️' },
+    { id: 's3', name: 'Sketch Book', price: 199, oldPrice: 299, category: 'stationery', stock: 11, vendor: 'Paper Lane', emoji: '📘' },
+    { id: 's4', name: 'Desk Tray', price: 249, oldPrice: 350, category: 'stationery', stock: 9, vendor: 'Paper Lane', emoji: '📚' },
+    { id: 'n1', name: 'Salted Chips', price: 20, oldPrice: 30, category: 'snacks', stock: 40, vendor: 'Snack Corner', emoji: '🥨' },
+    { id: 'n2', name: 'Masala Mix', price: 22, oldPrice: 35, category: 'snacks', stock: 35, vendor: 'Snack Corner', emoji: '🍟' },
+    { id: 'n3', name: 'Roasted Peanuts', price: 49, oldPrice: 79, category: 'snacks', stock: 20, vendor: 'Snack Corner', emoji: '🥜' },
+    { id: 'n4', name: 'Crunch Biscuits', price: 42, oldPrice: 60, category: 'snacks', stock: 28, vendor: 'Snack Corner', emoji: '🍪' }
+  ],
+  reviews: [
+    { customer: 'Nisha', vendor: 'Green Basket', rating: 5, comment: 'Fresh vegetables and very quick delivery.' },
+    { customer: 'Karthik', vendor: 'Leaf & Pot', rating: 4, comment: 'Plants looked healthy and packaging was neat.' },
+    { customer: 'Aditi', vendor: 'Paper Lane', rating: 5, comment: 'Stationery quality is great and the order arrived fast.' },
+    { customer: 'Riya', vendor: 'Snack Corner', rating: 5, comment: 'Tasty snacks and easy checkout experience.' }
+  ],
+  promotions: [
+    { id: 1, vendor: 'Green Basket', title: 'Weekend Fresh Deal', discount: 20, validUntil: '2026-11-20' },
+    { id: 2, vendor: 'Leaf & Pot', title: 'Plant Parenthood Sale', discount: 15, validUntil: '2026-11-18' },
+    { id: 3, vendor: 'Paper Lane', title: 'Back to School', discount: 25, validUntil: '2026-11-24' }
+  ],
+  notifications: [
+    { id: 1, vendor: 'Green Basket', title: 'New order received', message: 'A customer placed an order for fresh produce.', unread: true },
+    { id: 2, vendor: 'Leaf & Pot', title: 'Inventory alert', message: 'Snake plant stock is low and should be replenished.', unread: true },
+    { id: 3, vendor: 'Paper Lane', title: 'Promotion live', message: 'Back to school discount is now running.', unread: false }
+  ],
+  orders: [
+    { id: 'ORD-1042', customer: 'Aarav Verma', vendor: 'Green Basket', items: 'Tomato, Banana', total: 520, status: 'Completed' },
+    { id: 'ORD-1043', customer: 'Neha Singh', vendor: 'Leaf & Pot', items: 'Snake Plant, Aloe Vera', total: 640, status: 'Completed' },
+    { id: 'ORD-1044', customer: 'Rajat Shah', vendor: 'Paper Lane', items: 'Notebook, Pen Set', total: 380, status: 'Completed' },
+    { id: 'ORD-1045', customer: 'Sana Khan', vendor: 'Snack Corner', items: 'Lays, Peanuts', total: 220, status: 'Completed' }
+  ],
+  customerOrders: [
+    { id: 'ORD-1039', customer: 'Ava Patel', vendor: 'Green Basket', items: 'Tomato Basket', total: 180, status: 'Completed' },
+    { id: 'ORD-1038', customer: 'Ava Patel', vendor: 'Leaf & Pot', items: 'Aloe Vera', total: 199, status: 'Out for delivery' },
+    { id: 'ORD-1037', customer: 'Ava Patel', vendor: 'Paper Lane', items: 'Notebook', total: 99, status: 'Order received' }
+  ],
+  cart: JSON.parse(localStorage.getItem('localMarketCart') || '[]')
+};
+
+const categoryNames = {
   groceries: 'Groceries',
   'plants-pots': 'Plants & Pots',
   stationery: 'Stationery',
   snacks: 'Snacks'
 };
 
-const productCatalog = {
-  groceries: [
-    { id: 'g1', name: 'Tomato (1kg)', price: 40, oldPrice: 60, image: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=900&q=80' },
-    { id: 'g2', name: 'Potato (1kg)', price: 35, oldPrice: 50, image: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=900&q=80' },
-    { id: 'g3', name: 'Banana (1kg)', price: 45, oldPrice: 60, image: 'https://images.unsplash.com/photo-1640958900081-7b069dd23e9c?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'g4', name: 'Spinach (250g)', price: 20, oldPrice: 30, image: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=900&q=80' },
-    { id: 'g5', name: 'Rice (1kg)', price: 55, oldPrice: 75, image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'g6', name: 'Onion (1kg)', price: 45, oldPrice: 65, image: 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'g7', name: 'Cucumber (1kg)', price: 35, oldPrice: 50, image: 'https://images.unsplash.com/photo-1449300079323-02e209d9d3a6?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'g8', name: 'Capsicum (500g)', price: 60, oldPrice: 85, image: 'https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?auto=format&fit=crop&w=900&q=80' },
-    { id: 'g9', name: 'Carrot (1kg)', price: 50, oldPrice: 70, image: 'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&w=900&q=80' },
-    { id: 'g10', name: 'Mango (1kg)', price: 120, oldPrice: 160, image: 'https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=900&q=80' },
-    { id: 'g11', name: 'Lemon (100g)', price: 15, oldPrice: 25, image: 'https://images.unsplash.com/photo-1582979512210-99b6a53386f9?auto=format&fit=crop&w=900&q=80' },
-    { id: 'g12', name: 'Garlic (250g)', price: 55, oldPrice: 75, image: 'https://media.istockphoto.com/id/183235420/photo/onion.jpg?s=612x612&w=0&k=20&c=sh-9ohb6BaCIJbBZuNNRk8nXsbqtKCgE4wOKdNAs7B8=' }
-  ],
-  'plants-pots': [
-    { id: 'p1', name: 'Snake Plant', price: 299, oldPrice: 450, image: 'https://images.unsplash.com/photo-1687552212914-03a30c82053c?q=80&w=715&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'p2', name: 'Aloe Vera', price: 199, oldPrice: 299, image: 'https://images.unsplash.com/photo-1763027076863-698a6a72c164?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'p3', name: 'Ceramic Pot', price: 249, oldPrice: 350, image: 'https://plus.unsplash.com/premium_photo-1670904892958-463abb214fd7?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'p4', name: 'Terracotta Pot', price: 149, oldPrice: 220, image: 'https://images.unsplash.com/photo-1620293106076-ad27d651efe3?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'p5', name: 'Mint Plant', price: 129, oldPrice: 180, image: 'https://images.unsplash.com/photo-1618130070080-91f4d55a2383?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'p6', name: 'Hanging Pot', price: 299, oldPrice: 400, image: 'https://images.unsplash.com/photo-1513491952389-d52ceeb8c9d3?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'p7', name: 'Bamboo Pot', price: 279, oldPrice: 380, image: 'https://images.unsplash.com/photo-1674461875598-41f69d6549b7?q=80&w=736&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'p8', name: 'Money Plant', price: 179, oldPrice: 250, image: 'https://images.unsplash.com/photo-1596724878582-76f1a8fdc24f?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'p9', name: 'Herbal Planter', price: 219, oldPrice: 310, image: 'https://images.unsplash.com/photo-1607529107925-04e67ae44b09?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'p10', name: 'Indoor Pot Set', price: 499, oldPrice: 699, image: 'https://images.unsplash.com/photo-1604762524889-3e2fcc145683?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'p11', name: 'Spider Plant', price: 199, oldPrice: 280, image: 'https://images.unsplash.com/photo-1611527664689-d430dd2a6774?q=80&w=1173&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'p12', name: 'Peace Lily', price: 349, oldPrice: 499, image: 'https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' }
-  ],
-  stationery: [
-    { id: 's1', name: 'Notebook', price: 99, oldPrice: 150, image: 'https://images.unsplash.com/photo-1501618669935-18b6ecb13d6d?q=80&w=1149&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 's2', name: 'Pen Set (10N)', price: 129, oldPrice: 199, image: 'https://static1.industrybuying.com/products/office-supplies/pens-pencils-markers/gel-pens/OFF.GEL.45387538_1668177649130.webp' },
-    { id: 's3', name: 'Folder Pack', price: 149, oldPrice: 220, image: 'https://images.unsplash.com/photo-1633520833019-e34afd4b8fad?q=80&w=1333&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 's4', name: 'Sketch Book', price: 199, oldPrice: 299, image: 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=900&q=80' },
-    { id: 's5', name: 'Sticky Notes', price: 69, oldPrice: 110, image: 'https://plus.unsplash.com/premium_photo-1705010662508-f6f146dce66d?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 's6', name: 'Colour Pencils', price: 179, oldPrice: 250, image: 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=900&q=80' },
-    { id: 's7', name: 'A4 Copy', price: 299, oldPrice: 399, image: 'https://images.unsplash.com/photo-1630734277837-ebe62757b6e0?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 's8', name: 'Desk Organizer', price: 349, oldPrice: 499, image: 'https://images.unsplash.com/photo-1644463589256-02679b9c0767?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 's9', name: 'Writing Pad', price: 89, oldPrice: 130, image: 'https://images.unsplash.com/photo-1683921045461-b8dc5ad37740?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 's10', name: 'Highlighter Set', price: 159, oldPrice: 220, image: 'https://images.unsplash.com/photo-1580569214296-5cf2bffc5ccd?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 's11', name: 'Mechanical Pencil', price: 119, oldPrice: 170, image: 'https://images.unsplash.com/photo-1732445486805-a84ad9314ef6?q=80&w=1303&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 's12', name: 'Geometry Set', price: 149, oldPrice: 210, image: 'https://plus.unsplash.com/premium_photo-1672256330251-a0432595f9cc?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' }
-  ],
-  snacks: [
-    { id: 'n1', name: 'Lays', price: 20, oldPrice: 30, image: 'https://images.unsplash.com/photo-1739065882919-03c8ae1a3da3?q=80&w=1115&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'n2', name: 'Kurkure', price: 20, oldPrice: 30, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2XeaBeYogQDxXb3mMiife-f_2kZ1IiTeJdXRJEL8qHg&s=10' },
-    { id: 'n3', name: 'Roasted Peanuts', price: 49, oldPrice: 79, image: 'https://images.unsplash.com/photo-1639070863891-a20035caf05a?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'n4', name: 'Masala Fries', price: 35, oldPrice: 50, image: 'https://images.unsplash.com/photo-1576107232684-1279f390859f?auto=format&fit=crop&w=900&q=80' },
-    { id: 'n5', name: 'Makhana', price: 99, oldPrice: 149, image: 'https://images.unsplash.com/photo-1710421576768-ff985fa63b60?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'n6', name: 'Namkeen Mix', price: 45, oldPrice: 65, image: 'https://images.unsplash.com/photo-1791989396500-127d525aa9f7?q=80&w=1212&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'n7', name: 'Biscuits', price: 35, oldPrice: 50, image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=900&q=80' },
-    { id: 'n8', name: 'Yippee Noodles', price: 149, oldPrice: 199, image: 'https://images.unsplash.com/photo-1628919311414-1ee37e9ed8ff?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'n9', name: 'Chips', price: 30, oldPrice: 45, image: 'https://images.unsplash.com/photo-1760997707695-f0b5527e5de9?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'n10', name: 'Roasted Seeds', price: 119, oldPrice: 169, image: 'https://plus.unsplash.com/premium_photo-1725878607601-db35b20463e8?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D' },
-    { id: 'n11', name: 'Popcorn', price: 40, oldPrice: 60, image: 'https://images.unsplash.com/photo-1578849278619-e73505e9610f?auto=format&fit=crop&w=900&q=80' },
-    { id: 'n12', name: 'Mixed Fruit Candies', price: 50, oldPrice: 75, image: 'https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?auto=format&fit=crop&w=900&q=80' }
-  ]
-};
-
-function formatPrice(value) {
-  return `₹${Number(value || 0).toLocaleString('en-IN')}`;
+function formatCurrency(value) {
+  return `₹${Number(value).toLocaleString('en-IN')}`;
 }
 
-function getProductLookup() {
-  const catalog = {};
-  Object.values(productCatalog).forEach((items) => {
-    items.forEach((item) => {
-      catalog[item.id] = item;
-    });
-  });
-  return catalog;
+function getCurrentVendor() {
+  return state.vendors.find((vendor) => vendor.id === state.currentVendorId) || null;
 }
 
-function getCart() {
-  try {
-    return JSON.parse(localStorage.getItem(cartKey) || '{}');
-  } catch (error) {
-    return {};
-  }
+function saveCart() {
+  localStorage.setItem('localMarketCart', JSON.stringify(state.cart));
 }
 
-function saveCart(cart) {
-  localStorage.setItem(cartKey, JSON.stringify(cart));
-}
-
-function updateCartCount() {
-  const cart = getCart();
-  const total = Object.values(cart).reduce((sum, item) => sum + (Number(item.quantity) || 0), 0);
-  const cartCount = document.getElementById('cartCount');
-  if (cartCount) {
-    cartCount.textContent = total;
-  }
-}
-
-function renderCategoryPanels() {
-  const container = document.getElementById('categoryPanels');
-  if (!container) return;
-
-  const categories = Object.keys(productCatalog);
-  const panels = categories.map((key) => {
-    const panelClass = key === 'groceries' ? 'catalog-panel active' : 'catalog-panel';
-    const items = productCatalog[key].map((item) => `
-      <article class="product-card" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
-        <img src="${item.image}" alt="${item.name}" />
-        <div class="product-info">
-          <span class="product-tag">${categoryLabels[key]}</span>
-          <h3 class="product-name">${item.name}</h3>
-          <div class="product-price">
-            <span class="price">${formatPrice(item.price)}</span>
-            <span class="old-price">${formatPrice(item.oldPrice)}</span>
-          </div>
-          <div class="product-actions">
-            <div class="quantity-box">
-              <button type="button" class="qty-btn" data-action="minus" aria-label="Decrease quantity">-</button>
-              <input class="qty-input" type="number" min="1" max="10" value="1" />
-              <button type="button" class="qty-btn" data-action="plus" aria-label="Increase quantity">+</button>
-            </div>
-            <button type="button" class="add-btn">Add to cart</button>
-          </div>
-        </div>
-      </article>
-    `).join('');
-
-    return `
-      <div class="${panelClass}" data-category-group="${key}">
-        ${items}
-      </div>
-    `;
-  }).join('');
-
-  container.innerHTML = panels;
-}
-
-function showView(viewName) {
-  const targetView = viewName || 'home';
+function showView(view) {
+  const target = view === 'home' ? 'home' : view === 'customer' ? 'customer' : getCurrentVendor() ? 'vendor-dashboard' : 'vendor-auth';
 
   document.querySelectorAll('.panel').forEach((panel) => {
-    const isActive = panel.id === targetView;
-    panel.classList.toggle('active', isActive);
-    panel.hidden = !isActive;
+    panel.classList.toggle('active', panel.id === target);
   });
 
   document.querySelectorAll('.nav-btn').forEach((button) => {
-    button.classList.toggle('active', button.dataset.view === targetView);
+    button.classList.toggle('active', button.dataset.view === 'home' ? view === 'home' : button.dataset.view === view);
   });
 }
 
-function showCategory(category) {
-  document.querySelectorAll('.filter-btn').forEach((button) => {
-    button.classList.toggle('active', button.dataset.category === category);
-  });
+// Vendor list on the customer page shows the shops available in the local marketplace.
+function renderVendorList() {
+  const container = document.getElementById('vendorList');
+  if (!container) return;
 
-  document.querySelectorAll('.catalog-panel').forEach((panel) => {
-    panel.classList.toggle('active', panel.dataset.categoryGroup === category);
-  });
+  container.innerHTML = state.vendors.map((vendor) => `
+    <div class="vendor-item">
+      <div>
+        <div class="vendor-name">${vendor.name}</div>
+        <div class="vendor-meta">${vendor.category} • ${vendor.city}</div>
+      </div>
+      <span class="badge ${vendor.rating >= 4.8 ? 'good' : 'mid'}">${vendor.rating.toFixed(1)}★</span>
+    </div>
+  `).join('');
+}
 
-  const title = document.getElementById('categoryTitle');
-  if (title) {
-    title.textContent = categoryLabels[category] || 'Groceries';
+// Customer category buttons and product card layout.
+function renderCategoryFilters() {
+  const container = document.getElementById('categoryFilters');
+  if (!container) return;
+
+  container.innerHTML = Object.entries(categoryNames).map(([key, label]) => `
+    <button class="filter-btn ${state.activeCategory === key ? 'active' : ''}" data-category="${key}">${label}</button>
+  `).join('');
+}
+
+// Product cards use emoji art instead of external images so the prototype stays lightweight.
+function renderProducts() {
+  const container = document.getElementById('productGrid');
+  if (!container) return;
+
+  const filtered = state.products.filter((product) => product.category === state.activeCategory);
+
+  container.innerHTML = filtered.map((product) => `
+    <article class="product-card">
+      <div class="product-art" aria-label="${product.name}">${product.emoji}</div>
+      <div class="product-body">
+        <div class="product-tag">${categoryNames[product.category]}</div>
+        <div class="product-name">${product.name}</div>
+        <div class="product-pricing">
+          <span class="price">${formatCurrency(product.price)}</span>
+          <span class="old-price">${formatCurrency(product.oldPrice)}</span>
+        </div>
+        <div class="stock">Stock: ${product.stock} left</div>
+        <div class="product-actions">
+          <div class="qty-box">
+            <button type="button" data-action="minus" data-product-id="${product.id}">−</button>
+            <input type="number" min="1" value="1" data-product-id="${product.id}" />
+            <button type="button" data-action="plus" data-product-id="${product.id}">+</button>
+          </div>
+          <button type="button" class="add-btn" data-product-id="${product.id}">Add</button>
+        </div>
+      </div>
+    </article>
+  `).join('');
+}
+
+function renderReviews() {
+  const container = document.getElementById('reviewList');
+  if (!container) return;
+
+  container.innerHTML = state.reviews.map((review) => `
+    <div class="review-item">
+      <div>
+        <div class="vendor-name">${review.customer}</div>
+        <div class="vendor-meta">${review.vendor}</div>
+      </div>
+      <div>
+        <div>${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
+        <div class="muted">${review.comment}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Customer sees only their own order timeline, not all orders in the marketplace.
+function renderCustomerTracking() {
+  const container = document.getElementById('customerStatusList');
+  if (!container) return;
+
+  const name = (document.getElementById('customerName')?.value || '').trim() || state.lastCustomerName;
+  state.lastCustomerName = name;
+  const statusSteps = ['Order received', 'Packed', 'Out for delivery', 'Completed'];
+  const matchingOrders = state.customerOrders.filter((order) => order.customer.toLowerCase() === name.toLowerCase());
+
+  if (!matchingOrders.length) {
+    container.innerHTML = '<p class="muted">No order history yet for this customer.</p>';
+    return;
   }
+
+  container.innerHTML = matchingOrders.slice(0, 3).map((order) => {
+    const currentIndex = Math.max(0, statusSteps.indexOf(order.status));
+
+    return `
+      <div class="status-row">
+        <div class="status-meta">
+          <strong>${order.vendor}</strong>
+          <span>${order.id}</span>
+        </div>
+        <div class="status-steps">
+          ${statusSteps.map((step, index) => `
+            <span class="status-step ${index <= currentIndex ? 'active' : ''}">${step}</span>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
 }
 
-function renderCheckout() {
-  const cart = getCart();
-  const entries = Object.values(cart);
-  const container = document.getElementById('checkoutItems');
-  const totalNode = document.getElementById('checkoutTotal');
-  const lookup = getProductLookup();
+function renderCart() {
+  const cartBox = document.getElementById('cartItems');
+  const totalEl = document.getElementById('cartTotal');
+  if (!cartBox || !totalEl) return;
 
-  if (!container || !totalNode) return;
-
-  if (!entries.length) {
-    container.innerHTML = '<p class="empty-cart">Your cart is empty.</p>';
-    totalNode.textContent = formatPrice(0);
+  if (!state.cart.length) {
+    cartBox.innerHTML = '<p class="muted">Your cart is empty.</p>';
+    totalEl.textContent = '₹0';
     return;
   }
 
   let total = 0;
-  container.innerHTML = entries.map((entry) => {
-    const item = lookup[entry.id] || {};
-    const productName = item.name || 'Item';
-    const productPrice = Number(item.price || 0);
-    const itemTotal = productPrice * Number(entry.quantity);
-    total += itemTotal;
-
+  cartBox.innerHTML = state.cart.map((item) => {
+    const product = state.products.find((entry) => entry.id === item.productId);
+    if (!product) return '';
+    total += product.price * item.quantity;
     return `
-      <div class="checkout-item">
-        <strong>${productName} × ${entry.quantity}</strong>
-        <span>${formatPrice(itemTotal)}</span>
+      <div class="cart-item">
+        <div>
+          <div class="row-title">${product.name}</div>
+          <div class="muted">${item.quantity} item(s)</div>
+        </div>
+        <strong>${formatCurrency(product.price * item.quantity)}</strong>
       </div>
     `;
   }).join('');
 
-  totalNode.textContent = formatPrice(total);
+  totalEl.textContent = formatCurrency(total);
 }
 
-function addToCart(productId, qty) {
-  const cart = getCart();
-  const id = String(productId);
-  const quantity = Math.min(Math.max(Number(qty) || 1, 1), 10);
+function addToCart(productId, qty = 1) {
+  const existing = state.cart.find((item) => item.productId === productId);
+  if (existing) {
+    existing.quantity += qty;
+  } else {
+    state.cart.push({ productId, quantity: qty });
+  }
 
-  cart[id] = cart[id] || { id: String(productId), quantity: 0 };
-  cart[id].quantity = Number(cart[id].quantity) + quantity;
-
-  saveCart(cart);
-  updateCartCount();
-  renderCheckout();
+  saveCart();
+  renderCart();
 }
 
+// Auth mode switches the form between login and signup without needing a separate page.
+function renderAuthMode() {
+  const signIn = document.getElementById('signinForm');
+  const signUp = document.getElementById('signupForm');
+  if (signIn && signUp) {
+    signIn.classList.toggle('hidden', state.authMode !== 'signin');
+    signUp.classList.toggle('hidden', state.authMode !== 'signup');
+  }
+
+  document.querySelectorAll('.auth-tab').forEach((tab) => {
+    tab.classList.toggle('active', tab.dataset.auth === state.authMode);
+  });
+}
+
+// Dashboard summary shows today's sales, order count, catalog health, and vendor alerts.
+function renderDashboard() {
+  const vendor = getCurrentVendor();
+  if (!vendor) return;
+
+  document.getElementById('dashboardTitle').textContent = `${vendor.name} dashboard`;
+
+  const vendorProducts = state.products.filter((product) => product.vendor === vendor.name);
+  const vendorOrders = state.orders.filter((order) => order.vendor === vendor.name);
+  const vendorReviews = state.reviews.filter((review) => review.vendor === vendor.name);
+  const vendorPromotions = state.promotions.filter((promo) => promo.vendor === vendor.name);
+  const vendorAlerts = state.notifications.filter((note) => note.vendor === vendor.name);
+
+  document.getElementById('statRevenue').textContent = formatCurrency(vendorOrders.reduce((sum, order) => sum + order.total, 0));
+  document.getElementById('statOrders').textContent = String(vendorOrders.length);
+  document.getElementById('statProducts').textContent = String(vendorProducts.length);
+  document.getElementById('statRating').textContent = vendorReviews.length
+    ? (vendorReviews.reduce((sum, review) => sum + review.rating, 0) / vendorReviews.length).toFixed(1)
+    : '0.0';
+
+  document.getElementById('activityList').innerHTML = [
+    `${vendor.name} keeps inventory and catalog updated for local customers.`,
+    `Recent order ${vendorOrders[0]?.id || 'ORD-0000'} is ready for action.`,
+    `${vendorPromotions.length} promotions are currently active.`
+  ].map((item) => `<li>${item}</li>`).join('');
+
+  document.getElementById('quickOrders').innerHTML = vendorOrders.slice(0, 3).map((order) => {
+    const statusClass = order.status === 'Completed' ? 'good' : order.status === 'Order received' ? 'medium' : 'bad';
+    return `
+      <div class="row-item">
+        <div>
+          <div class="row-title">${order.id}</div>
+          <div class="muted">${order.customer}</div>
+        </div>
+        <span class="status-pill ${statusClass}">${order.status}</span>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('alertsList').innerHTML = vendorAlerts.map((alert) => `
+    <div class="row-item">
+      <div>
+        <div class="row-title">${alert.title}</div>
+        <div class="muted">${alert.message}</div>
+      </div>
+      <span class="status-pill ${alert.unread ? 'good' : 'medium'}">${alert.unread ? 'New' : 'Seen'}</span>
+    </div>
+  `).join('');
+
+  document.getElementById('orderTableBody').innerHTML = vendorOrders.map((order) => `
+    <tr>
+      <td>${order.id}</td>
+      <td>${order.customer}</td>
+      <td>${order.items}</td>
+      <td>${formatCurrency(order.total)}</td>
+      <td>${order.status}</td>
+      <td><button type="button" class="secondary-btn" data-order-update="${order.id}">Next</button></td>
+    </tr>
+  `).join('');
+
+  document.getElementById('catalogList').innerHTML = vendorProducts.map((product) => `
+    <div class="row-item">
+      <div>
+        <div class="row-title">${product.name}</div>
+        <div class="muted">${formatCurrency(product.price)} • ${product.stock} in stock</div>
+      </div>
+      <span class="status-pill ${product.stock > 10 ? 'good' : 'medium'}">${product.stock > 10 ? 'Healthy' : 'Low'}</span>
+    </div>
+  `).join('');
+
+  document.getElementById('promotionList').innerHTML = vendorPromotions.map((promo) => `
+    <div class="row-item">
+      <div>
+        <div class="row-title">${promo.title}</div>
+        <div class="muted">Valid until ${promo.validUntil}</div>
+      </div>
+      <span class="status-pill good">${promo.discount}%</span>
+    </div>
+  `).join('');
+
+  document.getElementById('vendorReviewList').innerHTML = vendorReviews.length
+    ? vendorReviews.map((review) => `
+      <div class="review-item">
+        <div>
+          <div class="vendor-name">${review.customer}</div>
+          <div class="vendor-meta">${review.vendor}</div>
+        </div>
+        <div>
+          <div>${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
+          <div class="muted">${review.comment}</div>
+        </div>
+      </div>
+    `).join('')
+    : '<p class="muted">No reviews yet.</p>';
+}
+
+function updateDashboardTab(tab) {
+  state.activeTab = tab;
+  document.querySelectorAll('.vendor-panel').forEach((panel) => {
+    panel.classList.toggle('active', panel.id === `${tab}Panel`);
+  });
+
+  document.querySelectorAll('.vendor-tab').forEach((button) => {
+    button.classList.toggle('active', button.dataset.tab === tab);
+  });
+}
+
+// Vendor login checks the saved mock account and opens the seller dashboard.
+function handleVendorLogin(event) {
+  event.preventDefault();
+  const email = document.getElementById('signinEmail').value.trim();
+  const password = document.getElementById('signinPassword').value.trim();
+  const vendor = state.vendors.find((entry) => entry.email.toLowerCase() === email.toLowerCase() && entry.password === password);
+
+  if (!vendor) {
+    alert('Incorrect email or password.');
+    return;
+  }
+
+  state.currentVendorId = vendor.id;
+  localStorage.setItem('localMarketVendorId', String(vendor.id));
+  renderDashboard();
+  showView('vendor');
+  document.getElementById('signinForm').reset();
+}
+
+// Vendor signup creates a new shop profile and immediately logs the vendor in.
+function handleVendorSignup(event) {
+  event.preventDefault();
+  const shopName = document.getElementById('signupShop').value.trim();
+  const owner = document.getElementById('signupOwner').value.trim();
+  const city = document.getElementById('signupCity').value.trim();
+  const phone = document.getElementById('signupPhone').value.trim();
+  const email = document.getElementById('signupEmail').value.trim();
+  const password = document.getElementById('signupPassword').value.trim();
+
+  if (!shopName || !owner || !city || !phone || !email || !password) {
+    alert('Please fill out all vendor details.');
+    return;
+  }
+
+  const exists = state.vendors.some((vendor) => vendor.email.toLowerCase() === email.toLowerCase());
+  if (exists) {
+    alert('A vendor with that email already exists.');
+    return;
+  }
+
+  const newVendor = {
+    id: Date.now(),
+    name: shopName,
+    owner,
+    category: document.getElementById('signupCategory').value,
+    city,
+    phone,
+    email,
+    password,
+    rating: 4.8
+  };
+
+  state.vendors.push(newVendor);
+  state.currentVendorId = newVendor.id;
+  localStorage.setItem('localMarketVendorId', String(newVendor.id));
+
+  state.notifications.unshift({
+    id: Date.now(),
+    vendor: newVendor.name,
+    title: 'Vendor account created',
+    message: 'Your shop is now live and ready to receive orders.',
+    unread: true
+  });
+
+  document.getElementById('signupForm').reset();
+  renderVendorList();
+  renderDashboard();
+  showView('vendor');
+}
+
+// Logging out returns the vendor to the main landing page.
+function handleLogout() {
+  state.currentVendorId = null;
+  localStorage.removeItem('localMarketVendorId');
+  showView('home');
+}
+
+// Checkout creates both marketplace orders and the customer's personal order tracking list.
+function handleCheckoutSubmit(event) {
+  event.preventDefault();
+  if (!state.cart.length) {
+    document.getElementById('checkoutMessage').textContent = 'Your cart is empty.';
+    return;
+  }
+
+  const name = (document.getElementById('customerName').value || '').trim() || 'You';
+  state.lastCustomerName = name;
+  const address = document.getElementById('customerAddress').value.trim();
+  const paymentMethod = document.getElementById('paymentMethod')?.value || 'UPI';
+  const totalsByVendor = {};
+  const itemsByVendor = {};
+
+  state.cart.forEach((item) => {
+    const product = state.products.find((entry) => entry.id === item.productId);
+    if (!product) return;
+
+    totalsByVendor[product.vendor] = (totalsByVendor[product.vendor] || 0) + (product.price * item.quantity);
+    itemsByVendor[product.vendor] = itemsByVendor[product.vendor] || [];
+    itemsByVendor[product.vendor].push(`${product.name} x${item.quantity}`);
+  });
+
+  Object.entries(totalsByVendor).forEach(([vendorName, total]) => {
+    const id = `ORD-${Math.floor(1000 + Math.random() * 9000)}`;
+    const itemSummary = itemsByVendor[vendorName].join(', ');
+
+    state.orders.unshift({
+      id,
+      customer: name,
+      vendor: vendorName,
+      items: itemSummary,
+      total,
+      status: 'Order received'
+    });
+
+    state.customerOrders.unshift({
+      id,
+      customer: name,
+      vendor: vendorName,
+      items: itemSummary,
+      total,
+      status: 'Order received',
+      paymentMethod,
+      address
+    });
+
+    state.notifications.unshift({
+      id: Date.now(),
+      vendor: vendorName,
+      title: 'New customer order',
+      message: `${name} placed a new order using ${paymentMethod}.`,
+      unread: true
+    });
+  });
+
+  state.cart = [];
+  saveCart();
+  renderCart();
+  renderCustomerTracking();
+  renderDashboard();
+  document.getElementById('checkoutForm').reset();
+  document.getElementById('checkoutMessage').textContent = 'Order placed successfully. Payment received securely.';
+  document.getElementById('checkoutBox').classList.add('hidden');
+}
+
+// Event wiring keeps the app simple and easy to follow for a front-end prototype.
 function bindEvents() {
+  document.querySelectorAll('.nav-btn').forEach((button) => {
+    button.addEventListener('click', () => {
+      const view = button.dataset.view;
+      if (view === 'home' || view === 'customer') {
+        showView(view);
+      } else {
+        showView('vendor');
+      }
+    });
+  });
+
+  document.querySelectorAll('.auth-tab').forEach((tab) => {
+    tab.addEventListener('click', () => {
+      state.authMode = tab.dataset.auth;
+      renderAuthMode();
+    });
+  });
+
+  document.querySelectorAll('.filter-btn').forEach((button) => {
+    button.addEventListener('click', () => {
+      state.activeCategory = button.dataset.category;
+      renderCategoryFilters();
+      renderProducts();
+    });
+  });
+
   document.addEventListener('click', (event) => {
-    const navButton = event.target.closest('.nav-btn');
-    if (navButton) {
-      showView(navButton.dataset.view);
-      return;
-    }
-
-    const shopCard = event.target.closest('.shop-card');
-    if (shopCard) {
-      showCategory(shopCard.dataset.category);
-      showView('categories');
-      return;
-    }
-
-    const filterButton = event.target.closest('.filter-btn');
-    if (filterButton) {
-      showCategory(filterButton.dataset.category);
-      return;
-    }
-
-    const qtyButton = event.target.closest('.qty-btn');
+    const qtyButton = event.target.closest('[data-action]');
     if (qtyButton) {
-      const quantityBox = qtyButton.closest('.quantity-box');
-      const input = quantityBox?.querySelector('.qty-input');
+      const productId = qtyButton.dataset.productId;
+      const input = document.querySelector(`input[data-product-id="${productId}"]`);
       if (!input) return;
-
-      const currentValue = Number(input.value) || 1;
-      const nextValue = qtyButton.dataset.action === 'plus'
-        ? Math.min(currentValue + 1, 10)
-        : Math.max(currentValue - 1, 1);
-
-      input.value = String(nextValue);
+      const current = Number(input.value) || 1;
+      input.value = qtyButton.dataset.action === 'plus' ? Math.min(current + 1, 10) : Math.max(current - 1, 1);
       return;
     }
 
     const addButton = event.target.closest('.add-btn');
     if (addButton) {
-      const card = addButton.closest('.product-card');
-      const input = card?.querySelector('.qty-input');
-      const quantity = Number(input?.value) || 1;
-      addToCart(card?.dataset.id, quantity);
+      const productId = addButton.dataset.productId;
+      const input = document.querySelector(`input[data-product-id="${productId}"]`);
+      addToCart(productId, Number(input?.value) || 1);
       return;
+    }
+
+    const tabButton = event.target.closest('.vendor-tab');
+    if (tabButton) {
+      updateDashboardTab(tabButton.dataset.tab);
+      return;
+    }
+
+    const orderButton = event.target.closest('[data-order-update]');
+    if (orderButton) {
+      const order = state.orders.find((entry) => entry.id === orderButton.dataset.orderUpdate);
+      if (!order) return;
+      const statuses = ['Order received', 'Packed', 'Out for delivery', 'Completed'];
+      const index = statuses.indexOf(order.status);
+      order.status = statuses[Math.min(index + 1, statuses.length - 1)];
+
+      const customerOrder = state.customerOrders.find((entry) => entry.id === order.id);
+      if (customerOrder) {
+        customerOrder.status = order.status;
+      }
+
+      renderCustomerTracking();
+      renderDashboard();
     }
   });
 
-  document.getElementById('checkoutForm')?.addEventListener('submit', (event) => {
+  document.getElementById('customerName').addEventListener('input', renderCustomerTracking);
+
+  document.getElementById('checkoutBtn').addEventListener('click', () => {
+    document.getElementById('checkoutBox').classList.toggle('hidden');
+  });
+
+  document.getElementById('checkoutForm').addEventListener('submit', handleCheckoutSubmit);
+  document.getElementById('signinForm').addEventListener('submit', handleVendorLogin);
+  document.getElementById('signupForm').addEventListener('submit', handleVendorSignup);
+  document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+
+  document.getElementById('vendorProductForm').addEventListener('submit', (event) => {
     event.preventDefault();
+    const vendor = getCurrentVendor();
+    if (!vendor) return;
 
-    const message = document.getElementById('checkoutMessage');
-    if (!message) return;
+    state.products.unshift({
+      id: `vendor-${Date.now()}`,
+      name: document.getElementById('newProductName').value.trim(),
+      category: document.getElementById('newProductCategory').value,
+      price: Number(document.getElementById('newProductPrice').value),
+      oldPrice: Number(document.getElementById('newProductPrice').value) + 30,
+      stock: Number(document.getElementById('newProductStock').value),
+      vendor: vendor.name,
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=80'
+    });
 
-    message.textContent = 'Order placed';
-    localStorage.removeItem(cartKey);
-    updateCartCount();
-    renderCheckout();
     event.target.reset();
+    renderProducts();
+    renderDashboard();
+  });
+
+  document.getElementById('vendorPromotionForm').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const vendor = getCurrentVendor();
+    if (!vendor) return;
+
+    state.promotions.unshift({
+      id: Date.now(),
+      vendor: vendor.name,
+      title: document.getElementById('promoTitle').value.trim(),
+      discount: Number(document.getElementById('promoDiscount').value),
+      validUntil: document.getElementById('promoDate').value
+    });
+
+    event.target.reset();
+    renderDashboard();
   });
 }
 
+// Initial setup: data, page render, and interactive hooks are loaded only once.
 function init() {
-  renderCategoryPanels();
-  showCategory('groceries');
-  showView('home');
-  updateCartCount();
-  renderCheckout();
+  renderVendorList();
+  renderCategoryFilters();
+  renderProducts();
+  renderReviews();
+  renderCustomerTracking();
+  renderCart();
+  renderAuthMode();
+  renderDashboard();
+  updateDashboardTab('admin');
   bindEvents();
+  showView('home');
 }
 
 window.addEventListener('DOMContentLoaded', init);

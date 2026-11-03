@@ -1,171 +1,349 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Apna Bazaar</title>
+    <title>Local Market</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <header class="topbar">
-      <div class="brand">
-        <img class="brand-mark" src="logo.png" alt="Apna Bazaar logo" />
-        <div class="brand-copy">
-          <strong>Apna Bazaar</strong>
-          <span>LOCAL MARKET</span>
-        </div>
-      </div>
-
-      <nav class="main-nav" aria-label="Main navigation">
-        <button type="button" class="nav-btn active" data-view="home">Home</button>
-        <button type="button" class="nav-btn" data-view="categories">Categories</button>
-        <button type="button" class="nav-btn cart-btn" data-view="checkout">
-          <span>🛒</span>
-          <span>Cart</span>
-          <span id="cartCount" class="cart-count">0</span>
-        </button>
+      <div class="brand">LM</div>
+      <nav class="nav">
+        <button class="nav-btn active" data-view="home">Home</button>
+        <button class="nav-btn" data-view="customer">Customer</button>
+        <button class="nav-btn" data-view="vendor">Vendor</button>
       </nav>
     </header>
 
     <main class="page">
+      <!-- Home landing area with the two main routes: customer shopping and vendor access. -->
       <section id="home" class="panel active">
         <div class="hero">
-          <div class="hero-copy">
-            <p class="eyebrow">Fresh from your neighbourhood</p>
-            <h1>Shop locally for everyday essentials.</h1>
-            <p>Fresh produce, household basics, plants, stationery and snacks from trusted local sellers near you.</p>
+          <div>
+            <p class="eyebrow">Local marketplace for small businesses</p>
+            <h1>Buy local. Sell smarter.</h1>
+            <p class="lead">
+              Local Market helps small vendors build a digital storefront, manage stock,
+              receive orders, and grow with nearby customers who want trusted products,
+              secure checkout, and clear delivery updates.
+            </p>
+            <div class="hero-actions">
+              <button class="primary-btn" data-view="customer">Shop now</button>
+              <button class="secondary-btn" data-view="vendor">Vendor login / sign up</button>
+            </div>
           </div>
         </div>
 
-        <div class="section-block">
-          <div class="title-row">
-            <h2>Fresh essentials for every home</h2>
-            <p class="eyebrow">Categories</p>
-          </div>
-
-          <div class="shop-grid">
-            <button type="button" class="shop-card" data-category="groceries" style="background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1000&q=80');">
-              <span>Groceries</span>
-            </button>
-            <button type="button" class="shop-card" data-category="plants-pots" style="background-image: url('https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=1000&q=80');">
-              <span>Plants and Pots</span>
-            </button>
-            <button type="button" class="shop-card" data-category="stationery" style="background-image: url('https://tse1.mm.bing.net/th/id/OIP.BQTt5vaPXomBjewK-99-uQHaEv?r=0&rs=1&pid=ImgDetMain&o=7&rm=3');">
-              <span>Stationery</span>
-            </button>
-            <button type="button" class="shop-card" data-category="snacks" style="background-image: url('https://media1.popsugar-assets.com/files/thumbor/_kQYPOgrbL064Af_QCqvwgnd004/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2020/10/20/618/n/1922729/413675d6e3a9d780_netimgL0HJXE/i/Ultimate-Classic-Snacks-Package-Variety.jpg');">
-              <span>Snacks</span>
-            </button>
-          </div>
+        <div class="stats">
+          <div class="stat"><strong>180+</strong><span>Vendor stores</span></div>
+          <div class="stat"><strong>3.4k</strong><span>Monthly orders</span></div>
+          <div class="stat"><strong>94%</strong><span>Customer satisfaction</span></div>
+          <div class="stat"><strong>24/7</strong><span>Order updates</span></div>
         </div>
 
-        <div class="section-block">
-          <div class="title-row">
-            <h2>Trusted by your neighbourhood</h2>
-            <p class="eyebrow">Local vendors</p>
-          </div>
+        <div class="home-grid">
+          <article class="info-card">
+            <h3>For customers</h3>
+            <ul>
+              <li>Browse nearby vendors</li>
+              <li>Compare prices and categories</li>
+              <li>Add items to cart</li>
+              <li>Pay securely</li>
+              <li>Track deliveries and reviews</li>
+            </ul>
+          </article>
 
-          <div class="vendor-grid">
-            <article class="vendor-card">
-              <img src="https://tse1.mm.bing.net/th/id/OIP.2CkI60LUZEdjeZHxnTVBhAHaEO?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Green Basket" />
-              <div class="vendor-copy">
-                <h3>Green Basket</h3>
-                <p>Fresh vegetables and groceries</p>
-              </div>
-            </article>
-            <article class="vendor-card">
-              <img src="https://koala.sh/api/image/v2-c996u-ab0lq.jpg?width=1216&height=832&dream" alt="Leaf & Pot" />
-              <div class="vendor-copy">
-                <h3>Leaf and Pot</h3>
-                <p>Plants and planters</p>
-              </div>
-            </article>
-            <article class="vendor-card">
-              <img src="https://res.cloudinary.com/purnesh/image/upload/w_1000,f_auto,q_auto:eco,c_limit/wrapping-paper--gift-cards%2Cjpg0.jpg" alt="Paper Lane" />
-              <div class="vendor-copy">
-                <h3>Paper Lane</h3>
-                <p>Stationery and office basics</p>
-              </div>
-            </article>
-            <article class="vendor-card">
-              <img src="https://thumbs.dreamstime.com/b/colorful-snack-aisle-supermarket-vibrant-neatly-arranged-packages-shelves-offering-variety-choices-365442807.jpg" alt="Snack Corner" />
-              <div class="vendor-copy">
-                <h3>Snack Corner</h3>
-                <p>Namkeen and family snacks</p>
-              </div>
-            </article>
-          </div>
+          <article class="info-card">
+            <h3>For vendors</h3>
+            <ul>
+              <li>Create store profiles</li>
+              <li>Add products and stock</li>
+              <li>Manage orders and alerts</li>
+              <li>Run promotions</li>
+              <li>Review customer feedback</li>
+            </ul>
+          </article>
+
+          <article class="info-card">
+            <h3>Platform features</h3>
+            <ul>
+              <li>Catalog management</li>
+              <li>Inventory control</li>
+              <li>Digital payments</li>
+              <li>Customer reviews</li>
+              <li>Admin dashboard</li>
+            </ul>
+          </article>
         </div>
       </section>
 
-      <section id="categories" class="panel">
-        <div class="title-row">
-          <h2 id="categoryTitle">Groceries</h2>
+      <!-- Customer storefront: vendor list, category filters, products, reviews, and personal order tracking. -->
+      <section id="customer" class="panel">
+        <div class="section-head">
+          <h2>Customer marketplace</h2>
+          <p>Browse local stores and buy what you need.</p>
         </div>
 
-        <div class="filter-row">
-          <button type="button" class="filter-btn active" data-category="groceries">Groceries</button>
-          <button type="button" class="filter-btn" data-category="plants-pots">Plants and Pots</button>
-          <button type="button" class="filter-btn" data-category="stationery">Stationery</button>
-          <button type="button" class="filter-btn" data-category="snacks">Snacks</button>
-        </div>
+        <div class="layout">
+          <div class="main-area">
+            <div class="card">
+              <h3>Vendors</h3>
+              <div id="vendorList" class="vendor-list"></div>
+            </div>
 
-        <div id="categoryPanels" class="catalog-grid"></div>
-      </section>
+            <div class="card">
+              <h3>Categories</h3>
+              <div id="categoryFilters" class="category-row"></div>
+              <div id="productGrid" class="product-grid"></div>
+            </div>
 
-      <section id="checkout" class="panel">
-        <div class="title-row">
-          <h2>Your order</h2>
-        </div>
+            <div class="card">
+              <h3>Customer reviews</h3>
+              <div id="reviewList" class="review-list"></div>
+            </div>
 
-        <div class="checkout-layout">
-          <form id="checkoutForm" class="checkout-form">
-            <label>
-              Full name
-              <input type="text" id="customerName" placeholder="Your full name" required />
-            </label>
-            <label>
-              Phone number
-              <input type="tel" id="customerPhone" placeholder="Phone number" required />
-            </label>
-            <label>
-              Email
-              <input type="text" id="customerEmail" placeholder="you@example.com" required pattern=".*@.*" title="Please include @ in your email." />
-            </label>
-            <label>
-              Shipping address
-              <textarea id="customerAddress" rows="4" placeholder="Street, locality, city" required></textarea>
-            </label>
-            <button type="submit" class="primary-btn full-width">Place order</button>
-            <p id="checkoutMessage" class="order-message"></p>
-          </form>
+            <div class="card tracking-card">
+              <h3>Order tracking</h3>
+              <div id="customerStatusList" class="status-list"></div>
+            </div>
+          </div>
 
-          <aside class="summary-panel">
-            <h3>Order summary</h3>
-            <div id="checkoutItems" class="checkout-items"></div>
-            <div class="summary-total">
+          <aside class="card cart-box">
+            <h3>Cart</h3>
+            <div id="cartItems" class="cart-items"></div>
+            <div class="cart-total">
               <span>Total</span>
-              <strong id="checkoutTotal">₹0</strong>
+              <strong id="cartTotal">₹0</strong>
+            </div>
+            <button id="checkoutBtn" class="primary-btn full">Proceed to checkout</button>
+
+            <div id="checkoutBox" class="checkout-box hidden">
+              <h4>Checkout</h4>
+              <form id="checkoutForm">
+                <label>
+                  Full name
+                  <input id="customerName" type="text" value="Ava Patel" placeholder="Your name" required />
+                </label>
+                <label>
+                  Phone
+                  <input id="customerPhone" type="tel" placeholder="Phone number" required />
+                </label>
+                <label>
+                  Delivery address
+                  <textarea id="customerAddress" rows="3" placeholder="Street, city, state" required></textarea>
+                </label>
+                <label>
+                  Payment method
+                  <select id="paymentMethod">
+                    <option value="UPI">UPI / digital wallet</option>
+                    <option value="Debit Card">Debit card</option>
+                    <option value="Cash on Delivery">Cash on delivery</option>
+                  </select>
+                </label>
+                <button type="submit" class="primary-btn full">Place order</button>
+              </form>
+              <p id="checkoutMessage" class="checkout-message"></p>
             </div>
           </aside>
         </div>
       </section>
-    </main>
 
-    <footer class="footer">
-      <div class="footer-main">
-        <div class="footer-about">
-          <p class="footer-title">Apna Bazaar - Local Market Online Store for Small Vendors</p>
-          <p>CSE326 CA2 Project</p>
+      <!-- Vendor sign-in and sign-up flow. -->
+      <section id="vendor-auth" class="panel">
+        <div class="auth-box">
+          <div class="auth-tabs">
+            <button class="auth-tab active" data-auth="signin">Sign in</button>
+            <button class="auth-tab" data-auth="signup">Sign up</button>
+          </div>
+
+          <form id="signinForm" class="auth-form">
+            <h2>Vendor login</h2>
+            <label>
+              Email
+              <input id="signinEmail" type="email" placeholder="vendor@example.com" required />
+            </label>
+            <label>
+              Password
+              <input id="signinPassword" type="password" placeholder="Enter password" required />
+            </label>
+            <button type="submit" class="primary-btn full">Login</button>
+          </form>
+
+          <form id="signupForm" class="auth-form hidden">
+            <h2>Vendor sign up</h2>
+            <label>
+              Shop name
+              <input id="signupShop" type="text" placeholder="Green Basket" required />
+            </label>
+            <label>
+              Owner name
+              <input id="signupOwner" type="text" placeholder="Priya Sharma" required />
+            </label>
+            <label>
+              Category
+              <select id="signupCategory" required>
+                <option value="Groceries">Groceries</option>
+                <option value="Plants">Plants & Pots</option>
+                <option value="Stationery">Stationery</option>
+                <option value="Snacks">Snacks</option>
+              </select>
+            </label>
+            <label>
+              City
+              <input id="signupCity" type="text" placeholder="Bengaluru" required />
+            </label>
+            <label>
+              Phone
+              <input id="signupPhone" type="tel" placeholder="98765 43210" required />
+            </label>
+            <label>
+              Email
+              <input id="signupEmail" type="email" placeholder="vendor@example.com" required />
+            </label>
+            <label>
+              Password
+              <input id="signupPassword" type="password" placeholder="Create password" required />
+            </label>
+            <button type="submit" class="primary-btn full">Create account</button>
+          </form>
         </div>
-        <div class="footer-links">
-          <a href="https://github.com/Nimai-HK" target="_blank" rel="noreferrer">Nimai</a>
-          <a href="https://github.com/mukilanmuthuvalathan" target="_blank" rel="noreferrer">Mukilan</a>
-          <a href="https://github.com/mohit6362728-hub" target="_blank" rel="noreferrer">Mohit</a>
-          <a href="https://github.com/Nimai-HK/Local-Market-Online-Store-for-Small-Vendors" target="_blank" rel="noreferrer">Project Repo</a>
+      </section>
+
+      <!-- Vendor dashboard contains stock, alerts, order actions, promotions, and review summaries. -->
+      <section id="vendor-dashboard" class="panel">
+        <div class="dashboard-head">
+          <div>
+            <p class="eyebrow">Vendor dashboard</p>
+            <h2 id="dashboardTitle">Shop dashboard</h2>
+          </div>
+          <button id="logoutBtn" class="secondary-btn">Logout</button>
         </div>
-      </div>
-    </footer>
+
+        <div class="dashboard-tabs">
+          <button class="vendor-tab active" data-tab="admin">Admin</button>
+          <button class="vendor-tab" data-tab="alerts">Alerts</button>
+          <button class="vendor-tab" data-tab="orders">Orders</button>
+          <button class="vendor-tab" data-tab="catalog">Catalog</button>
+          <button class="vendor-tab" data-tab="promotions">Promotions</button>
+          <button class="vendor-tab" data-tab="reviews">Reviews</button>
+        </div>
+
+        <div id="adminPanel" class="vendor-panel active">
+          <div class="stats-grid">
+            <div class="mini-card"><strong id="statRevenue">₹0</strong><span>Total revenue</span></div>
+            <div class="mini-card"><strong id="statOrders">0</strong><span>Total orders</span></div>
+            <div class="mini-card"><strong id="statProducts">0</strong><span>Products</span></div>
+            <div class="mini-card"><strong id="statRating">0.0</strong><span>Average rating</span></div>
+          </div>
+
+          <div class="dashboard-grid">
+            <div class="card">
+              <h3>Recent activity</h3>
+              <ul id="activityList" class="activity-list"></ul>
+            </div>
+            <div class="card">
+              <h3>Latest orders</h3>
+              <div id="quickOrders" class="list-stack"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="alertsPanel" class="vendor-panel">
+          <div class="card">
+            <h3>Notifications</h3>
+            <div id="alertsList" class="list-stack"></div>
+          </div>
+        </div>
+
+        <div id="ordersPanel" class="vendor-panel">
+          <div class="card">
+            <h3>Order management</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Order</th>
+                  <th>Customer</th>
+                  <th>Items</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="orderTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="catalogPanel" class="vendor-panel">
+          <div class="dashboard-grid">
+            <form id="vendorProductForm" class="card form-card">
+              <h3>Add product</h3>
+              <label>
+                Product name
+                <input id="newProductName" type="text" placeholder="Fresh oranges" required />
+              </label>
+              <label>
+                Category
+                <select id="newProductCategory">
+                  <option value="groceries">Groceries</option>
+                  <option value="plants-pots">Plants & Pots</option>
+                  <option value="stationery">Stationery</option>
+                  <option value="snacks">Snacks</option>
+                </select>
+              </label>
+              <label>
+                Price (₹)
+                <input id="newProductPrice" type="number" min="1" value="150" required />
+              </label>
+              <label>
+                Stock
+                <input id="newProductStock" type="number" min="0" value="25" required />
+              </label>
+              <button type="submit" class="primary-btn full">Add product</button>
+            </form>
+
+            <div class="card">
+              <h3>Catalog</h3>
+              <div id="catalogList" class="list-stack"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="promotionsPanel" class="vendor-panel">
+          <div class="dashboard-grid">
+            <form id="vendorPromotionForm" class="card form-card">
+              <h3>Create promotion</h3>
+              <label>
+                Title
+                <input id="promoTitle" type="text" placeholder="Weekend deal" required />
+              </label>
+              <label>
+                Discount (%)
+                <input id="promoDiscount" type="number" min="5" max="80" value="15" required />
+              </label>
+              <label>
+                Valid until
+                <input id="promoDate" type="date" required />
+              </label>
+              <button type="submit" class="primary-btn full">Publish promotion</button>
+            </form>
+
+            <div class="card">
+              <h3>Active promotions</h3>
+              <div id="promotionList" class="list-stack"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="reviewsPanel" class="vendor-panel">
+          <div class="card">
+            <h3>Customer reviews</h3>
+            <div id="vendorReviewList" class="review-list"></div>
+          </div>
+        </div>
+      </section>
+    </main>
 
     <script src="script.js"></script>
   </body>
