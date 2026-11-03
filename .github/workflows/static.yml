@@ -37,7 +37,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: '.apna_bazaar_pro'
+          path: './apna_bazaar_pro'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
