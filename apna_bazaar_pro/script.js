@@ -90,6 +90,36 @@ function showView(view) {
   });
 }
 
+// Featured cards on the landing page show a few ready-to-buy products without any promo-heavy stats.
+function renderHomeProducts() {
+  const container = document.getElementById('homeGrid');
+  if (!container) return;
+
+  const featured = state.products.slice(0, 4);
+  container.innerHTML = featured.map((product) => `
+    <article class="product-card">
+      <div class="product-art" aria-label="${product.name}">${product.emoji}</div>
+      <div class="product-body">
+        <div class="product-tag">${categoryNames[product.category]}</div>
+        <div class="product-name">${product.name}</div>
+        <div class="product-pricing">
+          <span class="price">${formatCurrency(product.price)}</span>
+          <span class="old-price">${formatCurrency(product.oldPrice)}</span>
+        </div>
+        <div class="stock">Stock: ${product.stock} left</div>
+        <div class="product-actions">
+          <div class="qty-box">
+            <button type="button" data-action="minus" data-product-id="${product.id}">−</button>
+            <input type="number" min="1" value="1" data-product-id="${product.id}" />
+            <button type="button" data-action="plus" data-product-id="${product.id}">+</button>
+          </div>
+          <button type="button" class="add-btn" data-product-id="${product.id}">Add</button>
+        </div>
+      </div>
+    </article>
+  `).join('');
+}
+
 // Vendor list on the customer page shows the shops available in the local marketplace.
 function renderVendorList() {
   const container = document.getElementById('vendorList');
@@ -629,6 +659,7 @@ function bindEvents() {
 
 // Initial setup: data, page render, and interactive hooks are loaded only once.
 function init() {
+  renderHomeProducts();
   renderVendorList();
   renderCategoryFilters();
   renderProducts();

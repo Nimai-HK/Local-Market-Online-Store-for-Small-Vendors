@@ -8,7 +8,7 @@
   </head>
   <body>
     <header class="topbar">
-      <div class="brand">LM</div>
+      <div class="brand"><img class="brand-mark" src="logo.png" alt="Apna Bazaar logo" /></div>
       <nav class="nav">
         <button class="nav-btn active" data-view="home">Home</button>
         <button class="nav-btn" data-view="customer">Customer</button>
@@ -16,17 +16,17 @@
       </nav>
     </header>
 
+    <!-- Home landing area with a simple introduction and direct customer/vendor routes. -->
     <main class="page">
-      <!-- Home landing area with the two main routes: customer shopping and vendor access. -->
       <section id="home" class="panel active">
         <div class="hero">
           <div>
             <p class="eyebrow">Local marketplace for small businesses</p>
-            <h1>Buy local. Sell smarter.</h1>
+            <h1>Buy local. Sell smart.</h1>
             <p class="lead">
-              Local Market helps small vendors build a digital storefront, manage stock,
-              receive orders, and grow with nearby customers who want trusted products,
-              secure checkout, and clear delivery updates.
+              Apna Bazaar helps small vendors build a digital store, keep stock updated, receive
+              local orders, and promote products while customers browse nearby shops, compare items,
+              and track delivery updates with less confusion.
             </p>
             <div class="hero-actions">
               <button class="primary-btn" data-view="customer">Shop now</button>
@@ -35,46 +35,11 @@
           </div>
         </div>
 
-        <div class="stats">
-          <div class="stat"><strong>180+</strong><span>Vendor stores</span></div>
-          <div class="stat"><strong>3.4k</strong><span>Monthly orders</span></div>
-          <div class="stat"><strong>94%</strong><span>Customer satisfaction</span></div>
-          <div class="stat"><strong>24/7</strong><span>Order updates</span></div>
-        </div>
-
         <div class="home-grid">
-          <article class="info-card">
-            <h3>For customers</h3>
-            <ul>
-              <li>Browse nearby vendors</li>
-              <li>Compare prices and categories</li>
-              <li>Add items to cart</li>
-              <li>Pay securely</li>
-              <li>Track deliveries and reviews</li>
-            </ul>
-          </article>
-
-          <article class="info-card">
-            <h3>For vendors</h3>
-            <ul>
-              <li>Create store profiles</li>
-              <li>Add products and stock</li>
-              <li>Manage orders and alerts</li>
-              <li>Run promotions</li>
-              <li>Review customer feedback</li>
-            </ul>
-          </article>
-
-          <article class="info-card">
-            <h3>Platform features</h3>
-            <ul>
-              <li>Catalog management</li>
-              <li>Inventory control</li>
-              <li>Digital payments</li>
-              <li>Customer reviews</li>
-              <li>Admin dashboard</li>
-            </ul>
-          </article>
+          <div>
+            <h3>Popular picks</h3>
+            <div id="homeGrid" class="product-grid"></div>
+          </div>
         </div>
       </section>
 
