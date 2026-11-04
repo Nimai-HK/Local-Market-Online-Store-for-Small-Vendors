@@ -6,10 +6,10 @@ const state = {
   activeTab: 'admin',
   lastCustomerName: 'Ava Patel',
   vendors: [
-    { id: 1, name: 'Green Basket', owner: 'Priya Sharma', category: 'Groceries', city: 'Bengaluru', location: '5th Cross, Jayanagar, 100m away from your house', phone: '98765 43210', email: 'priya@greenbasket.in', password: 'vendor123', rating: 4.9 },
-    { id: 2, name: 'Leaf & Pot', owner: 'Arjun Nair', category: 'Plants', city: 'Coimbatore', location: '2nd Main, Lakshmi Layout, 150m away from your house', phone: '99887 66121', email: 'arjun@leafpot.in', password: 'vendor123', rating: 4.8 },
-    { id: 3, name: 'Paper Lane', owner: 'Meera Iyer', category: 'Stationery', city: 'Chennai', location: '7th Cross, Koramangala, 80m away from your house', phone: '97441 22190', email: 'meera@paperlane.in', password: 'vendor123', rating: 4.7 },
-    { id: 4, name: 'Snack Corner', owner: 'Karan Joshi', category: 'Snacks', city: 'Pune', location: '1st Lane, HSR Layout, 120m away from your house', phone: '98112 77890', email: 'karan@snackcorner.in', password: 'vendor123', rating: 4.9 }
+    { id: 1, name: 'Green Basket', owner: 'Priya Sharma', category: 'Groceries', city: 'Phagwara', location: 'Near LPU Gate 2, 1.2 km from your location', phone: '98765 43210', email: 'priya@greenbasket.in', password: 'vendor123', rating: 4.9 },
+    { id: 2, name: 'Leaf & Pot', owner: 'Arjun Nair', category: 'Plants', city: 'Phagwara', location: 'Main market road, 2.4 km from your location', phone: '99887 66121', email: 'arjun@leafpot.in', password: 'vendor123', rating: 4.8 },
+    { id: 3, name: 'Paper Lane', owner: 'Meera Iyer', category: 'Stationery', city: 'Phagwara', location: 'Near bus stand, 3.1 km from your location', phone: '97441 22190', email: 'meera@paperlane.in', password: 'vendor123', rating: 4.7 },
+    { id: 4, name: 'Snack Corner', owner: 'Karan Joshi', category: 'Snacks', city: 'Phagwara', location: 'Grocery lane, 4.8 km from your location', phone: '98112 77890', email: 'karan@snackcorner.in', password: 'vendor123', rating: 4.9 }
   ],
   products: [
     { id: 'g1', name: 'Tomato Basket', price: 40, oldPrice: 60, category: 'groceries', stock: 26, vendor: 'Green Basket', emoji: '🍅' },
