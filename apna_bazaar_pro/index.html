@@ -8,7 +8,10 @@
   </head>
   <body>
     <header class="topbar">
-      <div class="brand"><img class="brand-mark" src="logo.png" alt="Apna Bazaar logo" /></div>
+      <div class="brand">
+        <img class="brand-mark" src="logo.png" alt="Apna Bazaar logo" />
+        <span class="brand-name">Apna Bazaar</span>
+      </div>
       <nav class="nav">
         <button class="nav-btn active" data-view="home">Home</button>
         <button class="nav-btn" data-view="customer">Customer</button>
@@ -28,17 +31,6 @@
               local orders, and promote products while customers browse nearby shops, compare items,
               and track delivery updates with less confusion.
             </p>
-            <div class="hero-actions">
-              <button class="primary-btn" data-view="customer">Shop now</button>
-              <button class="secondary-btn" data-view="vendor">Vendor login / sign up</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="home-grid">
-          <div>
-            <h3>Popular picks</h3>
-            <div id="homeGrid" class="product-grid"></div>
           </div>
         </div>
       </section>
@@ -97,14 +89,6 @@
                 <label>
                   Delivery address
                   <textarea id="customerAddress" rows="3" placeholder="Street, city, state" required></textarea>
-                </label>
-                <label>
-                  Payment method
-                  <select id="paymentMethod">
-                    <option value="UPI">UPI / digital wallet</option>
-                    <option value="Debit Card">Debit card</option>
-                    <option value="Cash on Delivery">Cash on delivery</option>
-                  </select>
                 </label>
                 <button type="submit" class="primary-btn full">Place order</button>
               </form>
@@ -309,6 +293,19 @@
         </div>
       </section>
     </main>
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <strong>Apna Bazaar</strong>
+        <span>Local market for nearby homes and trusted vendors</span>
+      </div>
+      <div class="footer-links">
+        <span>Local delivery</span>
+        <span>Daily essentials</span>
+        <span>Trusted shops</span>
+      </div>
+      <div class="footer-copy">Built for neighbourhood convenience, quick delivery, and community-first shopping.</div>
+    </footer>
 
     <script src="script.js"></script>
   </body>

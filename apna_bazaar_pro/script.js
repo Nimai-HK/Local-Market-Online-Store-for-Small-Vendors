@@ -6,10 +6,10 @@ const state = {
   activeTab: 'admin',
   lastCustomerName: 'Ava Patel',
   vendors: [
-    { id: 1, name: 'Green Basket', owner: 'Priya Sharma', category: 'Groceries', city: 'Bengaluru', phone: '98765 43210', email: 'priya@greenbasket.in', password: 'vendor123', rating: 4.9 },
-    { id: 2, name: 'Leaf & Pot', owner: 'Arjun Nair', category: 'Plants', city: 'Coimbatore', phone: '99887 66121', email: 'arjun@leafpot.in', password: 'vendor123', rating: 4.8 },
-    { id: 3, name: 'Paper Lane', owner: 'Meera Iyer', category: 'Stationery', city: 'Chennai', phone: '97441 22190', email: 'meera@paperlane.in', password: 'vendor123', rating: 4.7 },
-    { id: 4, name: 'Snack Corner', owner: 'Karan Joshi', category: 'Snacks', city: 'Pune', phone: '98112 77890', email: 'karan@snackcorner.in', password: 'vendor123', rating: 4.9 }
+    { id: 1, name: 'Green Basket', owner: 'Priya Sharma', category: 'Groceries', city: 'Bengaluru', location: '5th Cross, Jayanagar, 100m away from your house', phone: '98765 43210', email: 'priya@greenbasket.in', password: 'vendor123', rating: 4.9 },
+    { id: 2, name: 'Leaf & Pot', owner: 'Arjun Nair', category: 'Plants', city: 'Coimbatore', location: '2nd Main, Lakshmi Layout, 150m away from your house', phone: '99887 66121', email: 'arjun@leafpot.in', password: 'vendor123', rating: 4.8 },
+    { id: 3, name: 'Paper Lane', owner: 'Meera Iyer', category: 'Stationery', city: 'Chennai', location: '7th Cross, Koramangala, 80m away from your house', phone: '97441 22190', email: 'meera@paperlane.in', password: 'vendor123', rating: 4.7 },
+    { id: 4, name: 'Snack Corner', owner: 'Karan Joshi', category: 'Snacks', city: 'Pune', location: '1st Lane, HSR Layout, 120m away from your house', phone: '98112 77890', email: 'karan@snackcorner.in', password: 'vendor123', rating: 4.9 }
   ],
   products: [
     { id: 'g1', name: 'Tomato Basket', price: 40, oldPrice: 60, category: 'groceries', stock: 26, vendor: 'Green Basket', emoji: '🍅' },
@@ -129,7 +129,7 @@ function renderVendorList() {
     <div class="vendor-item">
       <div>
         <div class="vendor-name">${vendor.name}</div>
-        <div class="vendor-meta">${vendor.category} • ${vendor.city}</div>
+        <div class="vendor-meta">${vendor.category} • ${vendor.location || vendor.city}</div>
       </div>
       <span class="badge ${vendor.rating >= 4.8 ? 'good' : 'mid'}">${vendor.rating.toFixed(1)}★</span>
     </div>
@@ -480,7 +480,6 @@ function handleCheckoutSubmit(event) {
   const name = (document.getElementById('customerName').value || '').trim() || 'You';
   state.lastCustomerName = name;
   const address = document.getElementById('customerAddress').value.trim();
-  const paymentMethod = document.getElementById('paymentMethod')?.value || 'UPI';
   const totalsByVendor = {};
   const itemsByVendor = {};
 
@@ -513,7 +512,6 @@ function handleCheckoutSubmit(event) {
       items: itemSummary,
       total,
       status: 'Order received',
-      paymentMethod,
       address
     });
 
@@ -521,7 +519,7 @@ function handleCheckoutSubmit(event) {
       id: Date.now(),
       vendor: vendorName,
       title: 'New customer order',
-      message: `${name} placed a new order using ${paymentMethod}.`,
+      message: `${name} placed a new order for ${itemSummary}.`,
       unread: true
     });
   });
@@ -532,7 +530,7 @@ function handleCheckoutSubmit(event) {
   renderCustomerTracking();
   renderDashboard();
   document.getElementById('checkoutForm').reset();
-  document.getElementById('checkoutMessage').textContent = 'Order placed successfully. Payment received securely.';
+  document.getElementById('checkoutMessage').textContent = 'Order placed';
   document.getElementById('checkoutBox').classList.add('hidden');
 }
 
@@ -556,13 +554,16 @@ function bindEvents() {
     });
   });
 
-  document.querySelectorAll('.filter-btn').forEach((button) => {
-    button.addEventListener('click', () => {
+  const categoryFilters = document.getElementById('categoryFilters');
+  if (categoryFilters) {
+    categoryFilters.addEventListener('click', (event) => {
+      const button = event.target.closest('.filter-btn');
+      if (!button) return;
       state.activeCategory = button.dataset.category;
       renderCategoryFilters();
       renderProducts();
     });
-  });
+  }
 
   document.addEventListener('click', (event) => {
     const qtyButton = event.target.closest('[data-action]');
