@@ -5,8 +5,8 @@ A simple local market storefront for small vendors. The project is a front-end d
 
 ## Pages
 - Main page: landing section with local product categories and vendor cards
-- Categories page: product lists for groceries, plants and pots, stationery, and snacks
-- Checkout page: customer details and order summary
+- Customer Side: product lists for groceries, plants and pots, stationery, and snacks, stores, reviews, order tracking, and cart.
+- Vendor page: customer details and order summary, revenue and product management, offer management, and alerts.
 
 ## What the website does
 - Shows basic local market categories and everyday products
@@ -23,23 +23,27 @@ A simple local market storefront for small vendors. The project is a front-end d
 <table style="width:100%; border-collapse:collapse;">
   <tr>
     <th style="text-align:center;">Name</th>
+    <th style="text-align:center;">Github Profile</th>
     <th style="text-align:center;">Roll No</th>
     <th style="text-align:center;">Registration No.</th>
     <th style="text-align:center;">Section</th>
   </tr>
   <tr>
     <td style="text-align:center;">Mohit Kumar</td>
+    <th style="text-align:center;">[Mohit-MR](https://github.com/mohit6362728-hub)</th>
     <td style="text-align:center;">RK2P26GUA06</td>
     <td style="text-align:center;">12601077</td>
     <td rowspan="3" style="text-align:center; vertical-align:middle;">K2P26GU</td>
   </tr>
   <tr>
     <td style="text-align:center;">Nimai Hithesh</td>
+    <th style="text-align:center;">[Nimai-HK](https://github.com/Nimai-HK)</th>
     <td style="text-align:center;">RK2P26GUA03</td>
     <td style="text-align:center;">12606037</td>
   </tr>
   <tr>
     <td style="text-align:center;">Mukilan</td>
+    <th style="text-align:center;">[Mukilan](https://github.com/mukilanmuthuvalathan)</th>
     <td style="text-align:center;">RK2P26GUA07</td>
     <td style="text-align:center;">12601400</td>
   </tr>
