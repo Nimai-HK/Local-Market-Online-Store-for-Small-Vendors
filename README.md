@@ -18,7 +18,6 @@ A simple local market storefront for small vendors. The project is a front-end d
 - index.html — page structure
 - style.css — page styling, and styling of header, footer and cards (div and articles)
 - script.js — logic to switch between sections or divs, and data of category items.
-
 ## Project Members:
 <table style="width:100%; border-collapse:collapse;">
   <tr>
@@ -30,20 +29,26 @@ A simple local market storefront for small vendors. The project is a front-end d
   </tr>
   <tr>
     <td style="text-align:center;">Mohit Kumar</td>
-    <th style="text-align:center;">[Mohit-MR](https://github.com/mohit6362728-hub)</th>
+    <td style="text-align:center;">
+      <a href="https://github.com/mohit6362728-hub">Mohit-MR</a>
+    </td>
     <td style="text-align:center;">RK2P26GUA06</td>
     <td style="text-align:center;">12601077</td>
     <td rowspan="3" style="text-align:center; vertical-align:middle;">K2P26GU</td>
   </tr>
   <tr>
     <td style="text-align:center;">Nimai Hithesh</td>
-    <th style="text-align:center;">[Nimai-HK](https://github.com/Nimai-HK)</th>
+    <td style="text-align:center;">
+      <a href="https://github.com/Nimai-HK">Nimai-HK</a>
+    </td>
     <td style="text-align:center;">RK2P26GUA03</td>
     <td style="text-align:center;">12606037</td>
   </tr>
   <tr>
     <td style="text-align:center;">Mukilan</td>
-    <th style="text-align:center;">[Mukilan](https://github.com/mukilanmuthuvalathan)</th>
+    <td style="text-align:center;">
+      <a href="https://github.com/mukilanmuthuvalathan">Mukilan</a>
+    </td>
     <td style="text-align:center;">RK2P26GUA07</td>
     <td style="text-align:center;">12601400</td>
   </tr>
